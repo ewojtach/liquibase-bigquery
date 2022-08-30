@@ -38,7 +38,7 @@ public class BigQueryCreateTableGenerator extends CreateTableGenerator {
     public Sql[] generateSql(CreateTableStatement statement, Database database, SqlGeneratorChain sqlGeneratorChain) {
         List<Sql> additionalSql = new ArrayList();
         StringBuilder buffer = new StringBuilder();
-        System.out.println("Wlazlem do .... CreateTableGenerator");
+        System.out.println("generateSql CreateTableGenerator");
         buffer.append("CREATE TABLE ").append(database.escapeTableName(statement.getCatalogName(), statement.getSchemaName(), statement.getTableName())).append(" ");
         buffer.append("(");
         boolean isSinglePrimaryKeyColumn = statement.getPrimaryKeyConstraint() != null && statement.getPrimaryKeyConstraint().getColumns().size() == 1;

@@ -45,33 +45,9 @@ public class BigQueryTableSnapshotGenerator extends TableSnapshotGenerator {
     */
 
 
-    /*
-    @Override
-    protected void addTo(DatabaseObject foundObject, DatabaseSnapshot snapshot) throws DatabaseException {
-        if (!snapshot.getSnapshotControl().shouldInclude(Table.class)) {
-            return;
-        }
-        if (foundObject instanceof Schema) {
 
-            Database database = snapshot.getDatabase();
-            Schema schema = (Schema) foundObject;
 
-            String query = String.format("SELECT TABLE_NAME, TABLE_SCHEMA, NULL AS COMMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '%s';",
-                    database.getDefaultSchemaName());
-            Executor executor = Scope.getCurrentScope().getSingleton(ExecutorService.class).getExecutor("jdbc",
-                    database);
-            List<Map<String, ?>> returnList = executor.queryForList(new RawSqlStatement(query));
 
-            for (Map<String, ?> tablePropertiesMap : returnList) {
-                try {
-                    schema.addDatabaseObject(readTable(tablePropertiesMap, database));
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-    */
 
 /*
     @Override
@@ -144,6 +120,39 @@ public class BigQueryTableSnapshotGenerator extends TableSnapshotGenerator {
         return table;
     }
 */
+
+
+    protected Table readTable(CachedRow tableMetadataResultSet, Database database) throws SQLException, DatabaseException {
+        String rawTableName = tableMetadataResultSet.getString("TABLE_NAME");
+        String rawSchemaName = StringUtil.trimToNull(tableMetadataResultSet.getString("TABLE_SCHEM"));
+        String rawCatalogName = StringUtil.trimToNull(tableMetadataResultSet.getString("TABLE_CAT"));
+        String remarks = StringUtil.trimToNull(tableMetadataResultSet.getString("REMARKS"));
+        String tablespace = StringUtil.trimToNull(tableMetadataResultSet.getString("TABLESPACE_NAME"));
+        String defaultTablespaceString = StringUtil.trimToNull(tableMetadataResultSet.getString("DEFAULT_TABLESPACE"));
+        if (remarks != null) {
+            remarks = remarks.replace("''", "'");
+        }
+
+
+
+        Table table = (new Table()).setName(this.cleanNameFromDatabase(rawTableName, database));
+        table.setRemarks(remarks);
+        table.setTablespace(tablespace);
+        table.setDefaultTablespace(BooleanUtil.isTrue(Boolean.parseBoolean(defaultTablespaceString)));
+        CatalogAndSchema schemaFromJdbcInfo = ((AbstractJdbcDatabase)database).getSchemaFromJdbcInfo(rawCatalogName, rawSchemaName);
+        table.setSchema(new Schema(schemaFromJdbcInfo.getCatalogName(), schemaFromJdbcInfo.getSchemaName()));
+        if ("Y".equals(tableMetadataResultSet.getString("TEMPORARY"))) {
+            table.setAttribute("temporary", "GLOBAL");
+            String duration = tableMetadataResultSet.getString("DURATION");
+            if (duration != null && "SYS$TRANSACTION".equals(duration)) {
+                table.setAttribute("duration", "ON COMMIT DELETE ROWS");
+            } else if (duration != null && "SYS$SESSION".equals(duration)) {
+                table.setAttribute("duration", "ON COMMIT PRESERVE ROWS");
+            }
+        }
+
+        return table;
+    }
 
 
 }
