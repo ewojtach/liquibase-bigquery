@@ -31,10 +31,13 @@ jobs:
 
       - name: "Terraform Init"
         id: terraform_init
-        uses: hashicorp/terraform-github-actions/init@v0.4.0
+        uses: hashicorp/terraform-github-actions@master
+        with:
+          tf_actions_version: 1.1.7
+          tf_actions_subcommand: 'init'
         env:
           TF_ACTION_WORKING_DIR: src/test/resources/terraform
-          TF_ACTIONS_VERSION: 1.1.7
+
 
       - name: "Terraform Validate"
         id: terraform_validate
