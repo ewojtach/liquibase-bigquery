@@ -17,6 +17,7 @@ jobs:
         with:
           workload_identity_provider: 'projects/263903559714/locations/global/workloadIdentityPools/github-identity-pool/providers/github-identity-provider'
           service_account: 'gh-bq-deployer@gh-integration-tests.iam.gserviceaccount.com'
+          token_format: 'access_token'
 
       - name: set GCP project
         id: config_project
@@ -81,7 +82,6 @@ jobs:
     defaults:
       run:
         working-directory: src/test/resources/terraform
-    if: ${{ always() }}
 
     steps:
       - uses: actions/checkout@v3
