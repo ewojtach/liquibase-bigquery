@@ -35,8 +35,7 @@ jobs:
         with:
           tf_actions_version: 1.1.7
           tf_actions_subcommand: 'init'
-        env:
-          TF_ACTION_WORKING_DIR: src/test/resources/terraform
+          tf_actions_working_dir: src/test/resources/terraform
 
       - name: "Terraform Validate"
         id: terraform_validate
@@ -44,8 +43,7 @@ jobs:
         with:
           tf_actions_version: 1.1.7
           tf_actions_subcommand: 'validate'
-        env:
-          TF_ACTION_WORKING_DIR: src/test/resources/terraform
+          tf_actions_working_dir: src/test/resources/terraform
 
       - name: "Terraform Apply"
         uses: hashicorp/terraform-github-actions@master
@@ -53,9 +51,8 @@ jobs:
         with:
           tf_actions_version: 1.1.7
           tf_actions_subcommand: 'apply'
-          args: '-var-file=src/test/resources/terraform/gh.tfvars'
-        env:
-          TF_ACTION_WORKING_DIR: src/test/resources/terraform
+          tf_actions_working_dir: src/test/resources/terraform
+          args: '-var-file=gh.tfvars'
 
   test:
     runs-on: ubuntu-latest
