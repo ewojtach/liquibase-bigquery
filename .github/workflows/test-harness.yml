@@ -3,6 +3,8 @@ on:
   push:
     branches:
     - 'terraform-it'
+env:
+  tf_version: 'latest'
 
 jobs:
   setup:
