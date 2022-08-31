@@ -38,16 +38,21 @@ jobs:
         env:
           TF_ACTION_WORKING_DIR: src/test/resources/terraform
 
-
       - name: "Terraform Validate"
         id: terraform_validate
-        uses: hashicorp/terraform-github-actions/validate@v0.3.7
+        uses: hashicorp/terraform-github-actions@master
+        with:
+          tf_actions_version: 1.1.7
+          tf_actions_subcommand: 'validate'
         env:
           TF_ACTION_WORKING_DIR: src/test/resources/terraform
 
       - name: "Terraform Apply"
-        uses: hashicorp/terraform-github-actions/apply@v0.4.0
+        uses: hashicorp/terraform-github-actions@master
         id: terraform_apply
+        with:
+          tf_actions_version: 1.1.7
+          tf_actions_subcommand: 'apply'
         env:
           TF_ACTION_WORKING_DIR: src/test/resources/terraform
 
