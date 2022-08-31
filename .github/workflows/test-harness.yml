@@ -34,6 +34,7 @@ jobs:
         uses: hashicorp/terraform-github-actions/init@v0.4.0
         env:
           TF_ACTION_WORKING_DIR: src/test/resources/terraform
+          TF_ACTIONS_VERSION: 1.1.7
 
       - name: "Terraform Validate"
         id: terraform_validate
