@@ -53,6 +53,7 @@ jobs:
         with:
           tf_actions_version: 1.1.7
           tf_actions_subcommand: 'apply'
+          args: '-var-file=gh.tfvars'
         env:
           TF_ACTION_WORKING_DIR: src/test/resources/terraform
 
