@@ -7,9 +7,6 @@ on:
 jobs:
   setup:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: src/test/resources/terraform
 
     steps:
       - name: Set GCP environment
@@ -35,7 +32,7 @@ jobs:
         with:
           tf_actions_version: ${{ env.TERRAFORM_VERSION }}
           tf_actions_comment: "false"
-          tf_actions_working_dir: environments/${{ env.BRANCH_NAME }}
+          tf_actions_working_dir: src/test/resources/terraform
           tf_actions_subcommand: init
 
       - name: "Terraform Validate"
@@ -44,7 +41,7 @@ jobs:
         with:
           tf_actions_version: ${{ env.TERRAFORM_VERSION }}
           tf_actions_comment: "false"
-          tf_actions_working_dir: environments/${{ env.BRANCH_NAME }}
+          tf_actions_working_dir: src/test/resources/terraform
           tf_actions_subcommand: validate
 
       - name: "Terraform Plan"
@@ -53,7 +50,7 @@ jobs:
         with:
           tf_actions_version: ${{ env.TERRAFORM_VERSION }}
           tf_actions_comment: "false"
-          tf_actions_working_dir: environments/${{ env.BRANCH_NAME }}
+          tf_actions_working_dir: src/test/resources/terraform
           tf_actions_subcommand: plan
 
       - name: "Terraform Apply"
@@ -62,7 +59,7 @@ jobs:
         with:
           tf_actions_version: ${{ env.TERRAFORM_VERSION }}
           tf_actions_comment: "false"
-          tf_actions_working_dir: environments/${{ env.BRANCH_NAME }}
+          tf_actions_working_dir: src/test/resources/terraform
           tf_actions_subcommand: apply
 
   test:
