@@ -12,8 +12,4 @@ module "bigquery" {
   location          = "US" # Update location if needed
   dataset_labels    = {}
   time_partitioning = "DAY"
-  access {
-      role          = "OWNER"
-      user_by_email = locals.deployer_email
-    }
 }
