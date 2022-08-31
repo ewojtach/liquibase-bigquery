@@ -33,31 +33,19 @@ jobs:
         id: terraform_init
         uses: hashicorp/terraform-github-actions/init@v0.4.0
         env:
-          tf_actions_working_dir: src/test/resources/terraform
+          TF_ACTION_WORKING_DIR: src/test/resources/terraform
 
       - name: "Terraform Validate"
         id: terraform_validate
-        uses: ops18/terraform-github-actions@master
-        with:
-          tf_actions_comment: "false"
-          tf_actions_working_dir: src/test/resources/terraform
-          tf_actions_subcommand: validate
-
-      - name: "Terraform Plan"
-        id: terraform_plan
-        uses: ops18/terraform-github-actions@master
-        with:
-          tf_actions_comment: "false"
-          tf_actions_working_dir: src/test/resources/terraform
-          tf_actions_subcommand: plan
+        uses: hashicorp/terraform-github-actions/validate@v0.3.7
+        env:
+          TF_ACTION_WORKING_DIR: src/test/resources/terraform
 
       - name: "Terraform Apply"
-        uses: ops18/terraform-github-actions@master
+        uses: hashicorp/terraform-github-actions/apply@v0.4.0
         id: terraform_apply
-        with:
-          tf_actions_comment: "false"
-          tf_actions_working_dir: src/test/resources/terraform
-          tf_actions_subcommand: apply
+        env:
+          TF_ACTION_WORKING_DIR: src/test/resources/terraform
 
   test:
     runs-on: ubuntu-latest
