@@ -63,7 +63,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: BigQuery Test Run
-        run: mvn -Dit.test=LiquibaseHarnessSuiteIT -DdbUrl="jdbc:bigquery://https://www.googleapis.com/bigquery/v2:443;ProjectId=gh-integration-tests;DefaultDataset=harness_test_ds;OAuthType=0;OAuthServiceAcctEmail=gh-bq-deployer@gh-integration-tests.iam.gserviceaccount.com;" verify
+        run: mvn -Dit.test=LiquibaseHarnessSuiteIT verify
         continue-on-error: true
 
       - name: Archive Bigquery Database Test Results
@@ -90,6 +90,14 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: configure auth
+        id: auth
+        uses: 'google-github-actions/auth@v0'
+        with:
+          workload_identity_provider: 'projects/263903559714/locations/global/workloadIdentityPools/github-identity-pool/providers/github-identity-provider'
+          service_account: 'gh-bq-deployer@gh-integration-tests.iam.gserviceaccount.com'
+          token_format: 'access_token'
+          
       - name: "Terraform Init"
         id: terraform_init
         uses: hashicorp/terraform-github-actions@master
