@@ -24,6 +24,7 @@ jobs:
           workload_identity_provider: 'projects/263903559714/locations/global/workloadIdentityPools/github-identity-pool/providers/github-identity-provider'
           service_account: 'gh-bq-deployer@gh-integration-tests.iam.gserviceaccount.com'
           token_format: 'access_token'
+          create_credentials_file: 'true'
 
       - name: set GCP project
         id: config_project
