@@ -5,6 +5,7 @@ import liquibase.database.Database;
 import liquibase.database.core.OracleDatabase;
 import liquibase.datatype.DatabaseDataType;
 import liquibase.datatype.LiquibaseDataType;
+import liquibase.ext.bigquery.database.BigqueryDatabase;
 import liquibase.sql.Sql;
 import liquibase.sql.UnparsedSql;
 import liquibase.sqlgenerator.SqlGeneratorChain;
@@ -12,6 +13,7 @@ import liquibase.sqlgenerator.core.CreateTableGenerator;
 import liquibase.statement.DatabaseFunction;
 import liquibase.statement.NotNullConstraint;
 import liquibase.statement.core.CreateTableStatement;
+import liquibase.statement.core.DeleteStatement;
 import liquibase.structure.DatabaseObject;
 import liquibase.util.StringUtil;
 
@@ -26,6 +28,11 @@ public class BigQueryCreateTableGenerator extends CreateTableGenerator {
     @Override
     public int getPriority() {
         return BIGQUERY_PRIORITY_DATABASE;
+    }
+
+    @Override
+    public boolean supports(CreateTableStatement statement, Database database) {
+        return database instanceof BigqueryDatabase;
     }
 
     @Override
@@ -94,4 +101,6 @@ public class BigQueryCreateTableGenerator extends CreateTableGenerator {
         additionalSql.add(0, new UnparsedSql(sql, new DatabaseObject[]{this.getAffectedTable(statement)}));
         return (Sql[]) additionalSql.toArray(new Sql[additionalSql.size()]);
     }
+
+
 }

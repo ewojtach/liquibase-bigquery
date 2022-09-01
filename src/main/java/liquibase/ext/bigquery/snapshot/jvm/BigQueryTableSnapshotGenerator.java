@@ -7,8 +7,6 @@ import liquibase.structure.DatabaseObject;
 
 public class BigQueryTableSnapshotGenerator extends TableSnapshotGenerator {
 
-    public BigQueryTableSnapshotGenerator(){}
-
     @Override
     public int getPriority(Class<? extends DatabaseObject> objectType, Database database) {
         int priority = super.getPriority(objectType, database);
