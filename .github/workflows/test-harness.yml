@@ -71,7 +71,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: bigquery-test-results
-          path: build/spock-reports
+          path: target/surefire-reports
 
   destroy:
     runs-on: ubuntu-latest
