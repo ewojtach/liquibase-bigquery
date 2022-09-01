@@ -73,6 +73,12 @@ jobs:
           name: bigquery-test-results
           path: target/surefire-reports
 
+      - name: Test Summary
+        uses: test-summary/action@v1
+        with:
+          paths: "target/surefire-reports/**/TEST-*.xml"
+        if: always()
+
   destroy:
     runs-on: ubuntu-latest
     needs: [setup,test]
