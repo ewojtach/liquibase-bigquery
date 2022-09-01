@@ -63,7 +63,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: BigQuery Test Run
-        run: mvn -Dit.test=LiquibaseHarnessSuiteIT -DconfigFile=harness-config-it.yml verify
+        run: mvn -Dit.test=LiquibaseHarnessSuiteIT -DconfigFile=src/test/resources/harness-config-it.yml verify
         continue-on-error: true
 
       - name: Archive Bigquery Database Test Results
@@ -74,6 +74,7 @@ jobs:
           path: target/surefire-reports
 
       - name: Test Summary
+        continue-on-error: true
         uses: test-summary/action@v1
         with:
           paths: "target/surefire-reports/**/TEST-*.xml"
@@ -89,11 +90,19 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v2
+      - name: "Terraform Init"
+        id: terraform_init
+        uses: hashicorp/terraform-github-actions@master
+        with:
+          tf_actions_version: 1.1.7
+          tf_actions_subcommand: 'init'
+          tf_actions_working_dir: src/test/resources/terraform
 
-      - name: Terraform Init
-        run: terraform init
-
-      - name: Terraform Destroy
-        run: terraform destroy -auto-approve
+      - name: "Terraform Destroy"
+        id: terraform_destroy
+        uses: hashicorp/terraform-github-actions@master
+        with:
+          tf_actions_version: 1.1.7
+          tf_actions_subcommand: 'destroy'
+          tf_actions_working_dir: src/test/resources/terraform
+          args: '-auto-approve'
