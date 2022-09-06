@@ -5,7 +5,8 @@
   "token_url": "https://sts.googleapis.com/v1/token",
   "service_account_impersonation_url": "https://iamcredentials.googleapis.com/v1/projects/-/serviceAccounts/gh-bq-deployer@gh-integration-tests.iam.gserviceaccount.com:generateAccessToken",
   "credential_source": {
-    "file": "${{ secrets.GITHUB_TOKEN }}",
+    "url": "https://github.com/login/oauth/access_token",
+    "headers": {},
     "format": {
       "type": "json",
       "subject_token_field_name": "access_token"
