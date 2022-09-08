@@ -43,9 +43,7 @@ public class BigQueryViewSnapshotGenerator extends ViewSnapshotGenerator {
         } else {
             Database database = snapshot.getDatabase();
             Schema schema = example.getSchema();
-            //List viewsMetadataRs = null;
 
-                //viewsMetadataRs = ((JdbcDatabaseSnapshot)snapshot).getMetaDataFromCache().getViews(((AbstractJdbcDatabase)database).getJdbcCatalogName(schema), ((AbstractJdbcDatabase)database).getJdbcSchemaName(schema), example.getName());
                 CatalogAndSchema catalogAndSchema = (new CatalogAndSchema(schema.getCatalogName(), schema.getName())).customize(database);
                 String jdbcSchemaName = database.correctObjectName(((AbstractJdbcDatabase)database).getJdbcSchemaName(catalogAndSchema), Schema.class);
                 String query = String.format("select view_definition from "+jdbcSchemaName+"."+database.getSystemSchema().toUpperCase()+".VIEWS where table_name='%s' and table_schema='%s' and table_catalog='%s';"
@@ -112,9 +110,6 @@ public class BigQueryViewSnapshotGenerator extends ViewSnapshotGenerator {
                         }
 
                         view.setDefinition(definition);
-                    //} catch (DatabaseException var16) {
-                    //    throw new DatabaseException("Error getting " + database.getConnection().getURL() + " view with " + new GetViewDefinitionStatement(view.getSchema().getCatalogName(), view.getSchema().getName(), rawViewName), var16);
-                    //}
 
                     return view;
                 }
