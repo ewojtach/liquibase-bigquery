@@ -4,7 +4,7 @@ locals {
 
 module "bigquery" {
   source                     = "terraform-google-modules/bigquery/google" # Path to the module
-  version                    = "~> 2.0.0"
+  version                    = "~> 4.4"
   dataset_id                 = "harness_test_ds"
   dataset_name               = "harness_test_ds"
   description                = "DataSet for liquibase harness tests to be run" # updated the description accordingly

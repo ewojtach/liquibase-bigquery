@@ -1,6 +1,11 @@
 name: BigQuery Cloud Integration Testing
-on: [pull_request]
-
+on:
+  push:
+    branches:
+      - '*'
+  pull_request:
+    branches:
+      - '*'
 env:
   tf_version: 'latest'
 
