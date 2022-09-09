@@ -1,8 +1,5 @@
 name: BigQuery Cloud Integration Testing
 on:
-  push:
-    branches:
-      - '*'
   pull_request:
     branches:
       - '*'
@@ -79,7 +76,7 @@ jobs:
             create_credentials_file: 'true'
 
       - name: BigQuery Test Run
-        run: mvn -Dit.test=LiquibaseHarnessSuiteIT -DconfigFile=harness-config-it.yml verify
+        run: mvn -Dit.test=LiquibaseHarnessSuiteIT verify
         continue-on-error: true
 
       - name: Archive Bigquery Database Test Results
