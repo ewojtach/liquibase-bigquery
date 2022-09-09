@@ -39,7 +39,7 @@ jobs:
           tf_actions_version: 1.1.7
           tf_actions_subcommand: 'init'
           tf_actions_working_dir: src/test/resources/terraform
-          args: '-backend-config=./backend/gh.conf'
+          args: '-backend-config=./backend/gh.conf -upgrade'
 
       - name: "Terraform Validate"
         id: terraform_validate
@@ -130,7 +130,7 @@ jobs:
           tf_actions_version: 1.1.7
           tf_actions_subcommand: 'init'
           tf_actions_working_dir: src/test/resources/terraform
-          args: '-backend-config=./backend/gh.conf'
+          args: '-backend-config=./backend/gh.conf  -upgrade'
 
       - name: "Terraform Destroy"
         id: terraform_destroy
