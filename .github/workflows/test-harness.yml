@@ -1,8 +1,6 @@
 name: BigQuery Cloud Integration Testing
-on:
-  push:
-    branches:
-    - 'terraform-it'
+on: [pull_request]
+
 env:
   tf_version: 'latest'
 
@@ -75,11 +73,8 @@ jobs:
             service_account: 'gh-bq-deployer@gh-integration-tests.iam.gserviceaccount.com'
             create_credentials_file: 'true'
 
-      - name: check credentials
-        run: echo $GOOGLE_APPLICATION_CREDENTIALS
-
       - name: BigQuery Test Run
-        run: mvn -Dit.test=LiquibaseHarnessSuiteIT verify
+        run: mvn -Dit.test=LiquibaseHarnessSuiteIT -DconfigFile=harness-config-it.yml verify
         continue-on-error: true
 
       - name: Archive Bigquery Database Test Results
