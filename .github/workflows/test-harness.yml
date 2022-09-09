@@ -75,6 +75,9 @@ jobs:
             service_account: 'gh-bq-deployer@gh-integration-tests.iam.gserviceaccount.com'
             create_credentials_file: 'true'
 
+      - name: check credentials
+        run: echo $GOOGLE_APPLICATION_CREDENTIALS
+
       - name: BigQuery Test Run
         run: mvn -Dit.test=LiquibaseHarnessSuiteIT -DdbUrl='jdbc:bigquery://https://www.googleapis.com/bigquery/v2:443;ProjectId=gh-integration-tests;DefaultDataset=harness_test_ds;OAuthType=4;OAuthPvtKey=$GOOGLE_APPLICATION_CREDENTIALS;LogLevel=6;' verify
         continue-on-error: true
