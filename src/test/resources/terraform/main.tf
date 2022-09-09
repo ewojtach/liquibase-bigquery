@@ -4,7 +4,7 @@ locals {
 
 module "bigquery" {
   source                     = "terraform-google-modules/bigquery/google"
-  version                    = "~> 4.0"
+  version                    = "~> 3.0"
   dataset_id                 = "harness_test_ds"
   dataset_name               = "harness_test_ds"
   description                = "DataSet for liquibase harness tests to be run" # updated the description accordingly
@@ -13,5 +13,4 @@ module "bigquery" {
   delete_contents_on_destroy = true
   dataset_labels             = {}
   time_partitioning          = "DAY"
-  access                     = []
 }
