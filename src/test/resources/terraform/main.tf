@@ -12,5 +12,4 @@ module "bigquery" {
   location                   = "US" # Update location if needed
   delete_contents_on_destroy = true
   dataset_labels             = {}
-  time_partitioning          = "DAY"
 }
