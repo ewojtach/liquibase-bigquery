@@ -37,6 +37,7 @@ jobs:
           tf_actions_version: 1.1.7
           tf_actions_subcommand: 'init'
           tf_actions_working_dir: src/test/resources/terraform
+          args: '-backend-config==./backend/gh.conf'
 
       - name: "Terraform Validate"
         id: terraform_validate
@@ -88,6 +89,30 @@ jobs:
       run:
         working-directory: src/test/resources/terraform
     steps:
+      - uses: actions/checkout@v3
+
+      - name: configure auth
+        id: auth
+        uses: 'google-github-actions/auth@v0'
+        with:
+          workload_identity_provider: 'projects/263903559714/locations/global/workloadIdentityPools/github-identity-pool/providers/github-identity-provider'
+          service_account: 'gh-bq-deployer@gh-integration-tests.iam.gserviceaccount.com'
+          token_format: 'access_token'
+          create_credentials_file: 'true'
+
+      - name: set GCP project
+        id: config_project
+        run: gcloud config set project gh-integration-tests
+
+      - name: "Terraform Init"
+        id: terraform_init
+        uses: hashicorp/terraform-github-actions@master
+        with:
+          tf_actions_version: 1.1.7
+          tf_actions_subcommand: 'init'
+          tf_actions_working_dir: src/test/resources/terraform
+          args: '-backend-config==./backend/gh.conf'
+
       - name: "Terraform Destroy"
         id: terraform_destroy
         uses: hashicorp/terraform-github-actions@master
