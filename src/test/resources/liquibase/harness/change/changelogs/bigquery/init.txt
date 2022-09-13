@@ -11,6 +11,7 @@ CREATE TABLE authors (
     added TIMESTAMP NOT NULL
 );
 
+
 INSERT INTO authors VALUES (1,'Eileen','Lubowitz','ppaucek@example.org','1991-03-04','2004-05-30 02:08:25');
 INSERT INTO authors VALUES (2,'Tamia','Mayert','shansen@example.org','2016-03-27','2014-03-21 02:52:00');
 
@@ -27,3 +28,32 @@ CREATE TABLE posts (
 
 INSERT INTO posts VALUES (1,1,'temporibus','voluptatum','Fugit non et doloribus repudiandae.','2015-11-18');
 INSERT INTO posts VALUES (2,2,'ea','aut','Tempora molestias maiores provident molestiae sint possimus quasi.','1975-06-08');
+
+CREATE TABLE tdatatypes (
+    tgeo GEOGRAPHY,
+    tbignumeric BIGNUMERIC,
+    tbool BOOL,
+    tbytes BYTES,
+    tdate DATE,
+    tdatetime DATETIME,
+    tfloat FLOAT64,
+    tint64 INT64,
+    tint INT,
+    tsmallint SMALLINT,
+    tinteger INTEGER,
+    tbigint BIGINT,
+    ttinyint TINYINT,
+    tbyteint BYTEINT,
+    tnumeric NUMERIC,
+    tdecimal DECIMAL,
+    tstring STRING,
+    ttime TIME,
+    ttimestamp TIMESTAMP,
+    tstringparam STRING(20),
+    tbytesparam BYTES(20),
+    tnumericparam1 NUMERIC(10),
+    tnumericparam2 NUMERIC(10,5),
+    tdecimalparam1 DECIMAL(10),
+    tdecimalparam2 DECIMAL(10,9),
+    tbignumericparam BIGNUMERIC(10,9)
+);

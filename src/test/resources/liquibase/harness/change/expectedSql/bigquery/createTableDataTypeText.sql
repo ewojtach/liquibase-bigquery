@@ -1,1 +1,1 @@
-CREATE TABLE createTableDataTypeText (textCol STRING)
+CREATE TABLE lharness.createTableDataTypeText (textCol STRING)
