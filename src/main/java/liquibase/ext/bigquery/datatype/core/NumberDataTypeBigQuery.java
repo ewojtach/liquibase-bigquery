@@ -25,7 +25,6 @@ public class NumberDataTypeBigQuery extends LiquibaseDataType {
     public DatabaseDataType toDatabaseDataType(Database database) {
         if(database instanceof BigqueryDatabase){
 
-            System.out.println(this.getName()+" "+this.getRawDefinition());
             BigqueryDatabase bqd = (BigqueryDatabase) database;
             DatabaseDataType type =  new DatabaseDataType("NUMERIC", this.getParameters());
             return type;
