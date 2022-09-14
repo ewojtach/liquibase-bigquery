@@ -231,7 +231,7 @@
                     <configuration>
                         <propertyFileWillOverride>true</propertyFileWillOverride>
                         <propertyFile>target/classes/liquibase.properties</propertyFile>
-                        <logging>DEBUG</logging>
+                        <logging>INFO</logging>
                         <changeLogFile>target/classes/changelog.sql</changeLogFile>
 
                         <outputChangeLogFile>target/classes/generatedChangelog.bigquery.xml</outputChangeLogFile>
