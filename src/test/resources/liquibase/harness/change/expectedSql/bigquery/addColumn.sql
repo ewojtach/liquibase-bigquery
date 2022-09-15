@@ -1,4 +1,5 @@
 INVALID TEST
+---
 'BigQuery does not handle properly column drops which is tested as last step in this test
 ALTER TABLE lharness.authors ADD COLUMN varcharColumn STRING
 ALTER TABLE lharness.authors ADD COLUMN intColumn INT64
