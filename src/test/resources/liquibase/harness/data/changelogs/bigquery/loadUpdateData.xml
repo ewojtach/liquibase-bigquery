@@ -15,7 +15,7 @@
         <rollback>
             <sql splitStatements="true">
                 DELETE FROM authors WHERE id = 1;
-                INSERT INTO authors VALUES ('1','Eileen','Lubowitz','ppaucek@example.org','1991-03-04','2004-05-30T02:08:25');
+                INSERT INTO authors VALUES (1,'Eileen','Lubowitz','ppaucek@example.org','1991-03-04','2004-05-30T02:08:25');
                 DELETE FROM authors WHERE id = 7;
                 DELETE FROM authors WHERE id = 8;
             </sql>
