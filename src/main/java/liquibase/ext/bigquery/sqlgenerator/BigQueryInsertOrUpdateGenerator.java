@@ -10,8 +10,8 @@ import liquibase.sqlgenerator.SqlGeneratorChain;
 import liquibase.sqlgenerator.core.InsertOrUpdateGenerator;
 import liquibase.statement.core.InsertOrUpdateStatement;
 
-public class InsertOrUpdateGeneratorSnowflake extends InsertOrUpdateGenerator {
-    public InsertOrUpdateGeneratorSnowflake() {
+public class BigQueryInsertOrUpdateGenerator extends InsertOrUpdateGenerator {
+    public BigQueryInsertOrUpdateGenerator() {
     }
 
     public boolean supports(InsertOrUpdateStatement statement, Database database) {
@@ -58,7 +58,7 @@ public class InsertOrUpdateGeneratorSnowflake extends InsertOrUpdateGenerator {
     }
 
     protected String getRecordCheck(InsertOrUpdateStatement insertOrUpdateStatement, Database database, String whereClause) {
-        return "MERGE INTO " + insertOrUpdateStatement.getTableName() + " USING (VALUES (1)) ON " + whereClause + " WHEN NOT MATCHED THEN ";
+        return "MERGE INTO " + insertOrUpdateStatement.getTableName() + " USING (SELECT 1) ON " + whereClause + " WHEN NOT MATCHED THEN ";
     }
 
     protected String getElse(Database database) {
