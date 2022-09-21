@@ -16,6 +16,7 @@ import liquibase.structure.core.*;
 import liquibase.util.StringUtil;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -38,7 +39,8 @@ public class BigQueryUniqueConstraintSnapshotGenerator extends UniqueConstraintS
 
     @Override
     protected List<CachedRow> listConstraints(Table table, DatabaseSnapshot snapshot, Schema schema) throws DatabaseException, SQLException {
-        return (new BigQueryResultSetConstraintsExtractor(snapshot, schema.getCatalogName(), schema.getName(), table.getName())).fastFetch();
+        Scope.getCurrentScope().getLog(this.getClass()).info("Constraints not supported by BigQuery");
+        return new ArrayList<>(); //new BigQueryResultSetConstraintsExtractor(snapshot, schema.getCatalogName(), schema.getName(), table.getName())).fastFetch();
     }
 
     @Override
@@ -69,11 +71,9 @@ public class BigQueryUniqueConstraintSnapshotGenerator extends UniqueConstraintS
     private void setValidateOptionIfAvailable(Database database, UniqueConstraint uniqueConstraint, Map<String, ?> columnsMetadata) {
         if (database instanceof BigqueryDatabase) {
             Object constraintValidate = columnsMetadata.get("CONSTRAINT_VALIDATE");
-            String VALIDATE = "VALIDATED";
             if (constraintValidate != null && !constraintValidate.toString().trim().isEmpty()) {
                 uniqueConstraint.setShouldValidate("VALIDATED".equals(this.cleanNameFromDatabase(constraintValidate.toString().trim(), database)));
             }
-
         }
     }
 
