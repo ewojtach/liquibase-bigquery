@@ -13,10 +13,10 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class BigQueryResultSetConstraintsExtractor extends BigQueryResultSetCache.SingleResultSetExtractor {
-    private Database database;
-    private String catalogName;
-    private String schemaName;
-    private String tableName;
+    final private Database database;
+    final private String catalogName;
+    final private String schemaName;
+    final private String tableName;
 
     public BigQueryResultSetConstraintsExtractor(DatabaseSnapshot databaseSnapshot, String catalogName, String schemaName, String tableName) {
         super(databaseSnapshot.getDatabase());
@@ -31,11 +31,11 @@ public class BigQueryResultSetConstraintsExtractor extends BigQueryResultSetCach
     }
 
     public BigQueryResultSetCache.RowData rowKeyParameters(CachedRow row) {
-        return new BigQueryResultSetCache.RowData(this.catalogName, this.schemaName, this.database, new String[]{row.getString("TABLE_NAME")});
+        return new BigQueryResultSetCache.RowData(this.catalogName, this.schemaName, this.database, row.getString("TABLE_NAME"));
     }
 
     public BigQueryResultSetCache.RowData wantedKeyParameters() {
-        return new BigQueryResultSetCache.RowData(this.catalogName, this.schemaName, this.database, new String[]{this.tableName});
+        return new BigQueryResultSetCache.RowData(this.catalogName, this.schemaName, this.database, this.tableName);
     }
 
     public List<CachedRow> fastFetchQuery() throws SQLException, DatabaseException {

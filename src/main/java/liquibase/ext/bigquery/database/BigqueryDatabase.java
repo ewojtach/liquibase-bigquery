@@ -11,6 +11,7 @@ import liquibase.exception.DatabaseException;
 import liquibase.executor.ExecutorService;
 import liquibase.statement.core.GetViewDefinitionStatement;
 
+import javax.annotation.OverridingMethodsMustInvokeSuper;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Pattern;
@@ -105,7 +106,17 @@ public class BigqueryDatabase extends AbstractJdbcDatabase {
 
     @Override
     public boolean supportsRestrictForeignKeys() {
-        return true;
+        return false;
+    }
+
+    @Override
+    public boolean supportsPrimaryKeyNames() {
+        return false;
+    }
+
+    @Override
+    public boolean supportsNotNullConstraintNames() {
+        return false;
     }
 
     private String getDefaultDataset() {
