@@ -52,9 +52,6 @@ public class BigQueryViewSnapshotGenerator extends ViewSnapshotGenerator {
                 String rawSchemaName = schema.getName(); //StringUtil.trimToNull((String) row.get("TABLE_SCHEM"));
                 String rawCatalogName = schema.getCatalogName(); //StringUtil.trimToNull((String) row.get("TABLE_CAT"));
                 String remarks = null;// (String) row.get("REMARKS");
-                if (remarks != null) {
-                    remarks = remarks.replace("''", "'");
-                }
 
                 viewDefinition = (String) row.get("VIEW_DEFINITION");
 

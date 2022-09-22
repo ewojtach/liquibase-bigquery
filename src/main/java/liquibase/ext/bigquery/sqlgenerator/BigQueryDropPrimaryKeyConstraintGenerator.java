@@ -6,10 +6,10 @@ import liquibase.sql.Sql;
 import liquibase.sql.UnparsedSql;
 import liquibase.sqlgenerator.SqlGenerator;
 import liquibase.sqlgenerator.SqlGeneratorChain;
-import liquibase.sqlgenerator.core.AddPrimaryKeyGenerator;
-import liquibase.statement.core.AddPrimaryKeyStatement;
+import liquibase.sqlgenerator.core.DropPrimaryKeyGenerator;
+import liquibase.statement.core.DropPrimaryKeyStatement;
 
-public class BigQueryAddPrimaryKeyConstraintGenerator extends AddPrimaryKeyGenerator {
+public class BigQueryDropPrimaryKeyConstraintGenerator extends DropPrimaryKeyGenerator {
 
     @Override
     public int getPriority() {
@@ -17,12 +17,12 @@ public class BigQueryAddPrimaryKeyConstraintGenerator extends AddPrimaryKeyGener
     }
 
     @Override
-    public boolean supports(AddPrimaryKeyStatement statement, Database database) {
+    public boolean supports(DropPrimaryKeyStatement statement, Database database) {
         return database instanceof BigqueryDatabase;
     }
 
     @Override
-    public Sql[] generateSql(AddPrimaryKeyStatement statement, Database database, SqlGeneratorChain sqlGeneratorChain) {
+    public Sql[] generateSql(DropPrimaryKeyStatement statement, Database database, SqlGeneratorChain sqlGeneratorChain) {
         String sql = "select 1";
 
         return new Sql[]{

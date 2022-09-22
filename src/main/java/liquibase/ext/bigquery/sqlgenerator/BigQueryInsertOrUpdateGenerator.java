@@ -1,8 +1,6 @@
 package liquibase.ext.bigquery.sqlgenerator;
 
-
 import java.util.Date;
-import java.util.Iterator;
 import liquibase.database.Database;
 import liquibase.datatype.DataTypeFactory;
 import liquibase.ext.bigquery.database.BigqueryDatabase;

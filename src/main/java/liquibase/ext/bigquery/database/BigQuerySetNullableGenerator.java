@@ -18,11 +18,7 @@ public class BigQuerySetNullableGenerator extends SetNullableGenerator {
 
     @Override
     public boolean supports(SetNullableStatement statement, Database database) {
-        if (database.equals(BigqueryDatabase.PRODUCT_NAME)) {
-            return true;
-        } else {
-            return false;
-        }
+        return false;
     }
 
     @Override
@@ -34,7 +30,7 @@ public class BigQuerySetNullableGenerator extends SetNullableGenerator {
         String nullableString = statement.isNullable() ? " NULL" : " NOT NULL";
         String sql = "ALTER TABLE " + database.escapeTableName(statement.getCatalogName(), statement.getSchemaName(), statement.getTableName()) + " ALTER COLUMN " + database.escapeColumnName(statement.getCatalogName(), statement.getSchemaName(), statement.getTableName(), statement.getColumnName()) + " DROP" + nullableString;
 
-        List<Sql> returnList = new ArrayList();
+        List<Sql> returnList = new ArrayList<>();
         returnList.add(new UnparsedSql(sql, new DatabaseObject[]{this.getAffectedColumn(statement)}));
         if (database instanceof BigqueryDatabase) {
             Sql[] a = SqlGeneratorFactory.getInstance().generateSql(new ReorganizeTableStatement(statement.getCatalogName(), statement.getSchemaName(), statement.getTableName()), database);

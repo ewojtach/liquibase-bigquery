@@ -1,8 +1,6 @@
 package liquibase.ext.bigquery.database;
 
-import com.simba.googlebigquery.googlebigquery.client.BQClient;
 import com.simba.googlebigquery.googlebigquery.core.BQConnection;
-import com.simba.googlebigquery.googlebigquery.core.BQConnectionOptions;
 import com.simba.googlebigquery.jdbc.jdbc42.S42Connection;
 import liquibase.Scope;
 import liquibase.database.jvm.JdbcConnection;
@@ -81,24 +79,8 @@ public class BigqueryConnection extends JdbcConnection {
         return bc == null ? "" : bc.getSettings().m_location;
     }
 
-    public BQClient getUnderlyingBQClient() {
-        BQConnection bc = getUnderlyingBQConnection();
-        return bc == null ? null : bc.getClient();
-    }
-
-    public BQConnectionOptions getUnderlyingBQConnectionOptions() {
-        BQConnection bc = getUnderlyingBQConnection();
-        return bc == null ? null : bc.getSettings();
-    }
-
     @Override
     public Connection getUnderlyingConnection() {
-        try {
-            String url = con.getMetaData().getURL();
-            Scope.getCurrentScope().getLog(this.getClass()).fine(String.format("Returning connection, url %s BQConnection Location=%s", url, getUnderlyingBQConnectionLocation()));
-        } catch (SQLException e) {
-            Scope.getCurrentScope().getLog(this.getClass()).severe("getUnderlyingConnection error: ", e);
-        }
         return con;
     }
 

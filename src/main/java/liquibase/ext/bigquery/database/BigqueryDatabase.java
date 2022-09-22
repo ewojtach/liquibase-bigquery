@@ -11,7 +11,6 @@ import liquibase.exception.DatabaseException;
 import liquibase.executor.ExecutorService;
 import liquibase.statement.core.GetViewDefinitionStatement;
 
-import javax.annotation.OverridingMethodsMustInvokeSuper;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Pattern;
@@ -84,6 +83,15 @@ public class BigqueryDatabase extends AbstractJdbcDatabase {
     public boolean supportsTablespaces() {
         return false;
     }
+
+    /*@Override
+    public boolean supportsCatalogs() {
+        return false;
+    }*/
+    /*@Override
+    public boolean supportsCatalogInObjectName(Class<? extends DatabaseObject> type) {
+        return false;
+    }*/
 
     @Override
     public boolean isCorrectDatabaseImplementation(DatabaseConnection conn) throws DatabaseException {
@@ -161,10 +169,11 @@ public class BigqueryDatabase extends AbstractJdbcDatabase {
             return null;
         }
     }
+
     @Override
     public String getViewDefinition(CatalogAndSchema schema, String viewName) throws DatabaseException {
         schema = schema.customize(this);
-        String definition = (String)((ExecutorService) Scope.getCurrentScope().getSingleton(ExecutorService.class))
+        String definition = (String) ((ExecutorService) Scope.getCurrentScope().getSingleton(ExecutorService.class))
                 .getExecutor("jdbc", this)
                 .queryForObject(new GetViewDefinitionStatement(schema.getCatalogName(), schema.getSchemaName(), viewName), String.class);
         Scope.getCurrentScope().getLog(this.getClass()).info("getViewDefinition "+definition);
