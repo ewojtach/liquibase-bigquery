@@ -46,7 +46,7 @@ public class BigQuerySequenceSnapshotGenerator extends SequenceSnapshotGenerator
                 return "SELECT NULL AS SEQUENCE_NAME, NULL AS START_VALUE, NULL AS AS MIN_VALUE, NULL AS MAX_VALUE, " +
                         "NULL AS INCREMENT_BY, " +
                         "NULL AS WILL_CYCLE "+
-                        jdbcSchemaName+"."+database.getSystemSchema().toUpperCase() + ".COLUMNS where 1=0";
+                        jdbcSchemaName+"."+database.getSystemSchema().toUpperCase() + ".COLUMNS WHERE 1=0";
             }
             return super.getSelectSequenceSql(schema, database);
         }

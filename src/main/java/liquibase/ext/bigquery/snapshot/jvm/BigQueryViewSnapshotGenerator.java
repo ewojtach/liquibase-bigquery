@@ -37,7 +37,7 @@ public class BigQueryViewSnapshotGenerator extends ViewSnapshotGenerator {
 
             CatalogAndSchema catalogAndSchema = (new CatalogAndSchema(schema.getCatalogName(), schema.getName())).customize(database);
             String jdbcSchemaName = database.correctObjectName(((AbstractJdbcDatabase) database).getJdbcSchemaName(catalogAndSchema), Schema.class);
-            String query = String.format("select view_definition from " + jdbcSchemaName + "." + database.getSystemSchema().toUpperCase() + ".VIEWS where table_name='%s' and table_schema='%s' and table_catalog='%s';"
+            String query = String.format("SELECT view_definition FROM " + jdbcSchemaName + "." + database.getSystemSchema().toUpperCase() + ".VIEWS WHERE table_name='%s' AND table_schema='%s' AND table_catalog='%s';"
                     , example.getName(), schema.getName(), schema.getCatalogName());
 
             List<Map<String, ?>> viewsMetadataRs = Scope.getCurrentScope().getSingleton(ExecutorService.class)

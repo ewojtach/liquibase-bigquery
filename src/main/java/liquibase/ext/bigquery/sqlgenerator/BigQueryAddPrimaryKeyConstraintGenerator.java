@@ -23,7 +23,7 @@ public class BigQueryAddPrimaryKeyConstraintGenerator extends AddPrimaryKeyGener
 
     @Override
     public Sql[] generateSql(AddPrimaryKeyStatement statement, Database database, SqlGeneratorChain sqlGeneratorChain) {
-        String sql = "select 1";
+        String sql = "SELECT 1";
 
         return new Sql[]{
                 new UnparsedSql(sql, getAffectedPrimaryKey(statement))

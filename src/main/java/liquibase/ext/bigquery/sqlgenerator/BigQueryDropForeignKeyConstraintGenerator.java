@@ -24,7 +24,7 @@ public class BigQueryDropForeignKeyConstraintGenerator extends DropForeignKeyCon
 
     @Override
     public Sql[] generateSql(DropForeignKeyConstraintStatement statement, Database database, SqlGeneratorChain sqlGeneratorChain) {
-        String sql = "select 1";
+        String sql = "SELECT 1";
         return new Sql[]{
                 new UnparsedSql(sql, getAffectedForeignKey(statement))
         };

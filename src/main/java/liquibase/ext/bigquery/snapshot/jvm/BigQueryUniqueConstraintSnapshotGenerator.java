@@ -50,17 +50,17 @@ public class BigQueryUniqueConstraintSnapshotGenerator extends UniqueConstraintS
         String constraintName = database.correctObjectName(name, UniqueConstraint.class);
         String tableName = database.correctObjectName(table.getName(), Table.class);
 
-        String sql = "select CONSTRAINT_NAME, CONSTRAINT_NAME as COLUMN_NAME from " + database.getSystemSchema() + ".TABLE_CONSTRAINTS where CONSTRAINT_TYPE='UNIQUE'";
+        String sql = "select CONSTRAINT_NAME, CONSTRAINT_NAME as COLUMN_NAME FROM " + database.getSystemSchema() + ".TABLE_CONSTRAINTS WHERE CONSTRAINT_TYPE='UNIQUE'";
         if (schemaName != null) {
             sql = sql + "and CONSTRAINT_SCHEMA='" + schemaName + "' ";
         }
 
         if (tableName != null) {
-            sql = sql + "and TABLE_NAME='" + tableName + "' ";
+            sql = sql + "AND TABLE_NAME='" + tableName + "' ";
         }
 
         if (constraintName != null) {
-            sql = sql + "and CONSTRAINT_NAME='" + constraintName + "'";
+            sql = sql + "AND CONSTRAINT_NAME='" + constraintName + "'";
         }
 
         return Scope.getCurrentScope().getSingleton(ExecutorService.class).getExecutor("jdbc", database).queryForList(new RawSqlStatement(sql));

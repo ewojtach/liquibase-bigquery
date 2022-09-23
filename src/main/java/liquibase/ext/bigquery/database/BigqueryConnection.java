@@ -57,8 +57,8 @@ public class BigqueryConnection extends JdbcConnection {
     public String getDatabaseProductName() throws DatabaseException {
         try {
             return this.getWrappedConnection().getMetaData().getDatabaseProductName();
-        } catch (SQLException var2) {
-            throw new DatabaseException(var2);
+        } catch (SQLException e) {
+            throw new DatabaseException(e);
         }
     }
 
