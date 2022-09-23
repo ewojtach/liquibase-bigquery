@@ -8,11 +8,9 @@ import liquibase.sqlgenerator.SqlGeneratorChain;
 import liquibase.sqlgenerator.core.UpdateGenerator;
 import liquibase.statement.DatabaseFunction;
 import liquibase.statement.core.UpdateStatement;
-import liquibase.structure.DatabaseObject;
 import liquibase.util.SqlUtil;
 
 import java.util.Date;
-import java.util.Iterator;
 
 public class BigQueryUpdateGenerator extends UpdateGenerator {
 
@@ -31,7 +29,6 @@ public class BigQueryUpdateGenerator extends UpdateGenerator {
         StringBuilder sql = new StringBuilder("UPDATE ")
                 .append(database.escapeTableName(statement.getCatalogName(), statement.getSchemaName(), statement.getTableName()))
                 .append(" SET");
-        Iterator<String> it = statement.getNewColumnValues().keySet().iterator();
 
         for (String column : statement.getNewColumnValues().keySet()) {
             sql.append(" ")
@@ -49,7 +46,7 @@ public class BigQueryUpdateGenerator extends UpdateGenerator {
         if (statement.getWhereClause() != null) {
             sql.append(" WHERE ").append(SqlUtil.replacePredicatePlaceholders(database, statement.getWhereClause(), statement.getWhereColumnNames(), statement.getWhereParameters()));
         } else {
-            sql.append(" WHERE 1=1");
+            sql.append(" WHERE 1 = 1");
         }
 
         return new Sql[]{
