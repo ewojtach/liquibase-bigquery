@@ -84,15 +84,6 @@ public class BigqueryDatabase extends AbstractJdbcDatabase {
         return false;
     }
 
-    /*@Override
-    public boolean supportsCatalogs() {
-        return false;
-    }*/
-    /*@Override
-    public boolean supportsCatalogInObjectName(Class<? extends DatabaseObject> type) {
-        return false;
-    }*/
-
     @Override
     public boolean isCorrectDatabaseImplementation(DatabaseConnection conn) throws DatabaseException {
         return PRODUCT_NAME.trim().equalsIgnoreCase(conn.getDatabaseProductName().trim());

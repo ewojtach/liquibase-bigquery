@@ -4,9 +4,13 @@ import java.util.Date;
 import liquibase.database.Database;
 import liquibase.datatype.DataTypeFactory;
 import liquibase.ext.bigquery.database.BigqueryDatabase;
+import liquibase.sql.Sql;
+import liquibase.sql.UnparsedSql;
 import liquibase.sqlgenerator.SqlGeneratorChain;
 import liquibase.sqlgenerator.core.InsertOrUpdateGenerator;
 import liquibase.statement.core.InsertOrUpdateStatement;
+import liquibase.statement.core.UpdateStatement;
+import static liquibase.util.SqlUtil.replacePredicatePlaceholders;
 
 public class BigQueryInsertOrUpdateGenerator extends InsertOrUpdateGenerator {
     public BigQueryInsertOrUpdateGenerator() {

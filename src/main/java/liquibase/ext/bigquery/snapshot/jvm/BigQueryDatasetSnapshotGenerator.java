@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BigQueryDatasetSnapshotGenerator extends SchemaSnapshotGenerator {
+
     @Override
     public int getPriority(Class<? extends DatabaseObject> objectType, Database database) {
         int priority = super.getPriority(objectType, database);
@@ -37,10 +38,7 @@ public class BigQueryDatasetSnapshotGenerator extends SchemaSnapshotGenerator {
         ResultSet schemas = null;
         try {
             schemas = ((JdbcConnection) database.getConnection()).getMetaData()
-                    .getSchemas(
-                            database.getDefaultCatalogName(),
-                            null //database.getDefaultSchemaName()
-                    );
+                    .getSchemas(database.getDefaultCatalogName(), null);
 
             while (schemas.next()) {
                 returnList.add(JdbcUtils.getValueForColumn(schemas, "TABLE_SCHEM", database));
@@ -58,6 +56,7 @@ public class BigQueryDatasetSnapshotGenerator extends SchemaSnapshotGenerator {
     protected DatabaseObject snapshotObject(DatabaseObject example, DatabaseSnapshot snapshot) throws DatabaseException, InvalidExampleException {
         Database database = snapshot.getDatabase();
         Schema match = null;
+
         String catalogName = ((Schema) example).getCatalogName();
         String schemaName = example.getName();
         if (database.supportsSchemas()) {
