@@ -83,16 +83,19 @@ connection URL for the Simba Google BigQuery JDBC Connector:
 
 where:
 
-- [Host] - is the DNS or IP address of the server. Set it to `https://www.googleapis.com/bigquery/v2`
+- [Host] - is the DNS or IP address of the server.
+Set it to `https://www.googleapis.com/bigquery/v2`
 - [Port] - is the number of the TCP port to connect to. Set it to 443.
 - [Project] - is the id of your BigQuery project.
-- [AuthValue] - is a number that specifies the type of authentication used by the connector.
+- [AuthValue] - is a number that specifies the type of authentication
+used by the connector.
 
 The Simba Google BigQuery JDBC Connector uses the OAuth 2.0 protocol
 for authentication and authorization.
 It authenticates your connection through Google OAuth APIs.
 You can configure the connector to provide your credentials
-and authenticate the connection to the database using one of the following methods:
+and authenticate the connection to the database using one of the
+following methods:
 
 - Using a Google User Account
 - Using a Google Service Account
