@@ -16,7 +16,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-@DatabaseChange(name="mergeColumns", description = "Concatenates the values in two columns, joins them by with string, and stores the resulting value in a new column.", priority = ChangeMetaData.PRIORITY_DEFAULT)
+@DatabaseChange(name="mergeColumns",
+        description = "Concatenates the values in two columns, joins them by with string, and stores the resulting value in a new column.",
+        priority = ChangeMetaData.PRIORITY_DATABASE)
 public class BigQueryMergeColumnChange extends MergeColumnChange {
 
     @Override
@@ -26,7 +28,6 @@ public class BigQueryMergeColumnChange extends MergeColumnChange {
 
     @Override
     public SqlStatement[] generateStatements(final Database database) {
-        System.out.println("[!!!!! merge statement] start generating sql");
         List<SqlStatement> statements = new ArrayList<>();
 
         AddColumnChange addNewColumnChange = new AddColumnChange();
