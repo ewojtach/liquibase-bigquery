@@ -36,8 +36,7 @@ Currently, not supported are:
 
 Download and install liquibase-cli from
 [here](https://www.liquibase.org/download).
-You can use plain liquibase jar file, which can be downloaded from
-[maven repo](https://mvnrepository.com/artifact/org.liquibase/liquibase-core/4.6.2).
+You can use plain liquibase jar file, which can be downloaded from maven repo
 Having liquibase-core-4.6.2.jar file in our working directory
 will satisfy the very first requirement.
 
