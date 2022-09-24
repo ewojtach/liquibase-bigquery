@@ -55,8 +55,10 @@ will represent our BigQuery JDBC driver.
 
 ### Liquibase BigQuery extension
 
-Build this project with `mvn` or download the jar file corresponding to the latest release
-and put it into working directory next to liquibase-core jar file downloaded in previous step.
+Build this project with `mvn` or download the jar file
+corresponding to the latest release and put it
+into working directory next to liquibase-core jar file
+downloaded in previous step.
 
 ### Starting BigQuery dataset
 
@@ -73,18 +75,18 @@ logLevel:
 ```
 
 url represents JDBC connection string.
-After the official documentation the following is the format of the connection URL for the
-Simba Google BigQuery JDBC Connector:
+After the official documentation the following is the format of the
+connection URL for the Simba Google BigQuery JDBC Connector:
 
 `jdbc:bigquery://[Host]:[Port];ProjectId=[Project];OAuthType= [AuthValue];
 [Property1]=[Value1];[Property2]=[Value2];…`
 
 where:
 
-- [Host] is the DNS or IP address of the server. Set it to https://www.googleapis.com/bigquery/v2
-- [Port] is the number of the TCP port to connect to. Set it to 443.
-- [Project] is the id of your BigQuery project.
-- [AuthValue] is a number that specifies the type of authentication used by the connector.
+- [Host] - is the DNS or IP address of the server. Set it to `https://www.googleapis.com/bigquery/v2`
+- [Port] - is the number of the TCP port to connect to. Set it to 443.
+- [Project] - is the id of your BigQuery project.
+- [AuthValue] - is a number that specifies the type of authentication used by the connector.
 
 The Simba Google BigQuery JDBC Connector uses the OAuth 2.0 protocol
 for authentication and authorization.
