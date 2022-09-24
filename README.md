@@ -5,6 +5,7 @@ A Liquibase extension adding support for Google BigQuery. Include this in your a
 ## Supported features
 
 The following Liquibase ChangeTypes are supported:
+
 - createTable
 - dropTable
 - addColumn
@@ -16,6 +17,7 @@ The following Liquibase ChangeTypes are supported:
 ## Limitations
 
 Currently, not supported are:
+
 - constraints
 - sequences
 - primary and foreign keys
@@ -30,16 +32,24 @@ Currently, not supported are:
 
 ### Installing and setting up liquibase
 
-Download and install liquibase-cli from [here](https://www.liquibase.org/download). You can use plain liquibase jar file, which can be downloaded from [maven repo](https://mvnrepository.com/artifact/org.liquibase/liquibase-core/4.6.2). Having liquibase-core-4.6.2.jar jar file in our working directory will satisfy the very first requirement.
+Download and install liquibase-cli from [here](https://www.liquibase.org/download).
+You can use plain liquibase jar file, which can be downloaded from [maven repo]
+(https://mvnrepository.com/artifact/org.liquibase/liquibase-core/4.6.2).
+Having liquibase-core-4.6.2.jar jar file in our working directory will satisfy the very first requirement.
 
 ### JDBC driver for BigQuery
 
-You will also need JDBC driver for BigQuery. BigQuery documentation will redirect you to [where you can download supported JDBC/ODBC drivers](https://cloud.google.com/bigquery/docs/reference/odbc-jdbc-drivers)
-Click JDBC 4.2-compatible to start downloading the corresponding zip file. When you unzip it you will find quite some number of jars and one of them, named GoogleBigQueryJDBC42.jar, will representing our BigQuery JDBC driver.
+You will also need JDBC driver for BigQuery.
+BigQuery documentation will redirect you to 
+[where you can download supported JDBC/ODBC drivers](https://cloud.google.com/bigquery/docs/reference/odbc-jdbc-drivers)
+Click JDBC 4.2-compatible to start downloading the corresponding zip file.
+When you unzip it you will find quite some number of jars and one of them, named GoogleBigQueryJDBC42.jar,
+will represent our BigQuery JDBC driver.
 
 ### Liquibase BigQuery extension
 
-Build this project with `mvn` or download the jar file corresponding to the latest release and put it into working directory next to liquibase-core jar file downloaded in previous step.
+Build this project with `mvn` or download the jar file corresponding to the latest release
+and put it into working directory next to liquibase-core jar file downloaded in previous step.
 
 ### Starting BigQuery dataset
 
@@ -47,7 +57,8 @@ You can create a BigQuery dataset in the GCP console, use terraform or bq client
 
 ### Create configuration file
 
-Configure the connection in the file [liquibase.properties](https://docs.liquibase.com/workflows/liquibase-community/creating-config-properties.html):
+Configure the connection in the file
+[liquibase.properties](https://docs.liquibase.com/workflows/liquibase-community/creating-config-properties.html):
 
 ```properties
 driver:
@@ -55,21 +66,22 @@ url:
 logLevel:
 ```
 
-url represents JDBC connection string. After the official documentation the following is the format of the connection URL for the Simba Google BigQuery JDBC Connector:
+url represents JDBC connection string.
+After the official documentation the following is the format of the connection URL for the
+Simba Google BigQuery JDBC Connector:
 
 `jdbc:bigquery://[Host]:[Port];ProjectId=[Project];OAuthType= [AuthValue];[Property1]=[Value1];[Property2]=[Value2];…`
 
 where:
 
-[Host] is the DNS or IP address of the server. Set it to https://www.googleapis.com/bigquery/v2
+- [Host] is the DNS or IP address of the server. Set it to https://www.googleapis.com/bigquery/v2
+- [Port] is the number of the TCP port to connect to. Set it to 443.
+- [Project] is the id of your BigQuery project.
+- [AuthValue] is a number that specifies the type of authentication used by the connector.
 
-[Port] is the number of the TCP port to connect to. Set it to 443.
-
-[Project] is the id of your BigQuery project.
-
-[AuthValue] is a number that specifies the type of authentication used by the connector.
-
-The Simba Google BigQuery JDBC Connector uses the OAuth 2.0 protocol for authentication and authorization. It authenticates your connection through Google OAuth APIs. You can configure the connector to provide your credentials and authenticate the connection to the database using one of the following methods:
+The Simba Google BigQuery JDBC Connector uses the OAuth 2.0 protocol for authentication and authorization.
+It authenticates your connection through Google OAuth APIs. You can configure the connector to provide your credentials
+and authenticate the connection to the database using one of the following methods:
 
 - Using a Google User Account
 - Using a Google Service Account
@@ -94,7 +106,8 @@ java -jar liquibase-core-4.6.2.jar -changeLogFile changelog.sql update
 
 - generating the schema from current database state
 
-More detailed instructions for getting started can be found [here](https://medium.com/google-cloud/version-control-of-bigquery-schema-changes-with-liquibase-ddc7092d6d1d)
+More detailed instructions for getting started can be found
+[here](https://medium.com/google-cloud/version-control-of-bigquery-schema-changes-with-liquibase-ddc7092d6d1d)
 
 ## Using the Liquibase Test Harness in BigQuery Extension
 
