@@ -1,6 +1,7 @@
 # Liquibase Support for Google BigQuery
 
-A Liquibase extension adding support for Google BigQuery. Include this in your application project to run Liquibase database migration scripts against a Google BigQuery database.
+A Liquibase extension adding support for Google BigQuery.
+Include this in your application project to run Liquibase database migration scripts against a Google BigQuery database.
 
 ## Supported features
 
@@ -33,15 +34,15 @@ Currently, not supported are:
 ### Installing and setting up liquibase
 
 Download and install liquibase-cli from [here](https://www.liquibase.org/download).
-You can use plain liquibase jar file, which can be downloaded from [maven repo]
-(https://mvnrepository.com/artifact/org.liquibase/liquibase-core/4.6.2).
+You can use plain liquibase jar file, which can be downloaded from
+[maven repo](https://mvnrepository.com/artifact/org.liquibase/liquibase-core/4.6.2).
 Having liquibase-core-4.6.2.jar jar file in our working directory will satisfy the very first requirement.
 
 ### JDBC driver for BigQuery
 
 You will also need JDBC driver for BigQuery.
-BigQuery documentation will redirect you to 
-[where you can download supported JDBC/ODBC drivers](https://cloud.google.com/bigquery/docs/reference/odbc-jdbc-drivers)
+BigQuery documentation will redirect you to where you can
+[download supported JDBC/ODBC drivers](https://cloud.google.com/bigquery/docs/reference/odbc-jdbc-drivers)
 Click JDBC 4.2-compatible to start downloading the corresponding zip file.
 When you unzip it you will find quite some number of jars and one of them, named GoogleBigQueryJDBC42.jar,
 will represent our BigQuery JDBC driver.
@@ -80,7 +81,8 @@ where:
 - [AuthValue] is a number that specifies the type of authentication used by the connector.
 
 The Simba Google BigQuery JDBC Connector uses the OAuth 2.0 protocol for authentication and authorization.
-It authenticates your connection through Google OAuth APIs. You can configure the connector to provide your credentials
+It authenticates your connection through Google OAuth APIs.
+You can configure the connector to provide your credentials
 and authenticate the connection to the database using one of the following methods:
 
 - Using a Google User Account
@@ -92,7 +94,8 @@ Example shows authentication using Google Service Account
 
 ```properties
 driver: com.simba.googlebigquery.jdbc.Driver
-url: jdbc:bigquery://https://www.googleapis.com/bigquery/v2:443;ProjectId=<PROJECT_ID>;DefaultDataset=<DATASET_ID>;OAuthType=0;OAuthServiceAcctEmail=<SA_ACCOUNT>;OAuthPvtKeyPath=<PATH_TO_KEY_FOR_SA>;
+url: jdbc:bigquery://https://www.googleapis.com/bigquery/v2:443;ProjectId=<PROJECT_ID>;\
+  DefaultDataset=<DATASET_ID>;OAuthType=0;OAuthServiceAcctEmail=<SA_ACCOUNT>;OAuthPvtKeyPath=<PATH_TO_KEY_FOR_SA>;
 logLevel: WARN
 ```
 
